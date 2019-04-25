@@ -78,6 +78,10 @@ if(totaldar5.textContent < 0){
 }
 //finalizado os calculos
 
+
+
+
+
 var btnad = document.querySelector("#adicionar-receita");
 btnad.addEventListener("click", function(evento){
     evento.preventDefault(); //comportamento do button
@@ -87,10 +91,10 @@ btnad.addEventListener("click", function(evento){
     var categoria = form.categoria.value;
     var data = form.data.value;
     var valor = parseFloat(form.valor.value);
-    var erros = form.querySelector("#erro");
+    var erros = form.querySelector(".erros");
 
 
-    if(descricao.length <= 0){
+   /* if(descricao.length <= 0){
         erros.textContent = "Campo Descrição é obrigatorio.\n";
     }
     if(categoria.length <= 0){
@@ -101,13 +105,52 @@ btnad.addEventListener("click", function(evento){
     }
     if(isNaN(valor) ){
         erros.textContent += "Campo valor é obrigatorio.\n";
+    }
+    
+    if(valor ==0 ){
+     erros.textContent += "O valor é obrigatorio";
+    }else{*/
+    
+    //aplicando validação
+    var valor = parseFloat(form.valor.value);
+    var msgErros = document.querySelector(".erros");
+    var erros = [];
+    function limparerros(erros){
+        erros.innerHTML = "";
+    }
+
+    if(descricao.length <= 0){
+        erros.push("A descrição é obrigatória");
+        
+    }
+    if(categoria.length <= 0){
+        erros.push("A categoria é obrigatória");
+    }
+    if(data.length <= 0){
+        erros.push("A data é obrigatória");
+    }
+    if(isNaN(valor)){
+        erros.push("O valor é obrigatório.");
     }else{
-        if(valor ==0 ){
-            erros.textContent += "O valor é obrigatorio";
+        if(valor == 0){
+            erros.push("O valor deve ser diferente de zero (0).");
         }
-    
-    
+    }
    
+    if(erros.length > 0){
+        limparerros(msgErros);
+        for(var erro = 0; erro < erros.length; erro++){
+            var li = document.createElement("li");
+            li.textContent = erros [erro];
+            li.style.color = "red";
+            msgErros.appendChild(li);
+           
+        }
+        return;
+        
+    }
+    
+   //fim da aolicação de validação
    // var saldotr = form.saldotr.value;
 
     //criando a tr para financeiro
@@ -140,12 +183,42 @@ btnad.addEventListener("click", function(evento){
     tabelafinanceiro.appendChild(trfinanceiro);
     
     
-    }
+    
 });
-function limparerros(erros){
-    erros.innerHTML = "";
-}
 
+
+//teste
+/*
+var receitas = document.querySelector(".receita");
+
+var registro = 0;
+while(receita < receita.length){
+    var receita = receitas[registro];
+    var tdvalor =receita,queryselector(".info-valor");
+    var tdsaldo = receita,queryselector(".info-saldo");
+    saldo.textContent = valor.textContent;
+    saldo -= valor;
+    tdsaldo.textContent = saldo.tofixed(2);
+    if(saldo.textcontent < 0 ){
+        tdsaldo.style.color = "red";
+        tdsaldo.classlist.add("receita-negativa")//CSS with JS
+    }
+    registro++;
+
+}
+//for
+var registro = 0;
+for(registro = 0; registro < receitas.length; registro++){
+    
+}
+//erros com lista
+
+var msgErros = document.queryselector(".erros");
+var erros [];
+
+erros.push
+
+*/
 
 
 
